@@ -15,6 +15,7 @@ namespace BugTracker.Models
         public int TicketPriorityId { get; set; }
         public int TicketStatusId { get; set; }
         public int TicketTypeId { get; set; }
+
         public string SubmitterId { get; set; }
         public string DeveloperId { get; set; }
 

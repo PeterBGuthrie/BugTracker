@@ -12,10 +12,10 @@ namespace BugTracker.Helper
 
         public string GetFullName(string userId)
         {
-            var firstName = db.Users.Find(userId).FirstName;
-            var LastName = db.Users.Find(userId).LastName;
-            var fullName = firstName + " " + LastName;
-            return fullName;
+            var user = db.Users.Find(userId);
+            var firstName = user.FirstName;
+            var lastName = user.LastName;
+            return firstName + " " + lastName;
         }
 
         public string LastNameFirst(string userId)
@@ -23,5 +23,13 @@ namespace BugTracker.Helper
             var user = db.Users.Find(userId);
             return user.FullName;
         }
+
+        //public string GetUserRole()
+        //{
+        //    var userId = HttpContext.Current.User.Identity.GetUserId();
+        //    var user = db.Users.Find(userId);
+        //    var roleId = user.Roles.Where(u => u.UserId == userId);
+        //    return null;
+        //}
     }
 }
