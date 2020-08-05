@@ -71,5 +71,18 @@ namespace BugTracker.Models
         public DbSet<TicketPriority> TicketPriorities { get; set; }
 
         public System.Data.Entity.DbSet<BugTracker.Models.Project> Projects { get; set; }
+
+        public System.Data.Entity.DbSet<BugTracker.Models.Ticket> Tickets { get; set; }
+
+        public System.Data.Entity.DbSet<BugTracker.Models.TicketAttachment> TicketAttachments { get; set; }
+
+        public System.Data.Entity.DbSet<BugTracker.Models.ApplicationUser> ApplicationUsers { get; set; }
+
+        public System.Data.Entity.DbSet<BugTracker.Models.TicketComment> TicketComments { get; set; }
+
+        public System.Data.Entity.DbSet<BugTracker.Models.TicketHistory> TicketHistories { get; set; }
+
+        public System.Data.Entity.DbSet<BugTracker.Models.TicketNotification> TicketNotifications { get; set; }
+        public IEnumerable TicketStatus { get; internal set; }
     }
 }
