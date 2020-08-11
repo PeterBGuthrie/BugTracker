@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BugTracker.Models;
+using System.Net.Mail;
 
 namespace BugTracker.Controllers
 {
@@ -161,7 +162,26 @@ namespace BugTracker.Controllers
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    try
+                    {
+                        var from = "Bug Tracker<admin@rogue-asteroid.com>";
+                        var email = new MailMessage(from, model.Email)
+                        {
+                            Subject = "Confirm your account",
+                            Body = "Please confirm your account by clicking <a href =\"" + callbackUrl + "\">here</a>",
+                            IsBodyHtml = true
+                        };
+
+                        var svc = new EmailService();
+                        await svc.SendAsync(email);
+
+                        //return View(new EmailModel());
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        await Task.FromResult(0);
+                    }
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -201,21 +221,17 @@ namespace BugTracker.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        //public async Task<ActionResult> ResendEmailConfirmation(ForgotPasswordViewModel model)
-        //{
-        //    var user = await UserManager.FindByNameAsync(model.Email);
-        //    if (user != null)
-        //    {
-        //        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-        //        var callbackUrl = Url.Action("ConfirmEmail", "Account",
-        //        new { userId = user.Id, code = code }, protocol:
-        //        Request.Url.Scheme);
-        //        await UserManager.SendEmailAsync(user.Id, "Confirm your account",
-        //        "Please confirm your account by clicking <a
-        //       href =\"" + callbackUrl + "\">here</a>");
-        //    }
-        //    return RedirectToAction("ConfirmationSent");
-        //}
+        public async Task<ActionResult> ResendEmailConfirmation(ForgotPasswordViewModel model)
+        {
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user != null)
+            {
+                string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href =\"" + callbackUrl + "\">here</a>");
+            }
+            return RedirectToAction("ConfirmationSent");
+        }
         public ActionResult ConfimationSent()
         {
             return View();
