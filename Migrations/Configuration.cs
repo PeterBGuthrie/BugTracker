@@ -83,7 +83,7 @@ namespace BugTracker.Migrations
                 userManager.Create(new ApplicationUser()
                 {
                     Email = "davethedev@coderfoundry.com",
-                    UserName = "Dave the Dev",
+                    UserName = "davethedev@coderfoundry.com",
                     FirstName = "Dave",
                     LastName = "Dev"
                 }, "Abc&123!");
@@ -96,8 +96,8 @@ namespace BugTracker.Migrations
             {
                 userManager.Create(new ApplicationUser()
                 {
-                    Email = "Hillary@coderfoundry.com",
-                    UserName = "Hillary's Server",
+                    Email = "hillary@coderfoundry.com",
+                    UserName = "hillary@coderfoundry.com",
                     FirstName = "Hillary's",
                     LastName = "Clinton"
                 }, "Abc&123!");

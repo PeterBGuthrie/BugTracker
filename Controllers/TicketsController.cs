@@ -6,13 +6,17 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BugTracker.Helper;
 using BugTracker.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BugTracker.Controllers
 {
+    //[Authorize]
     public class TicketsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ProjectHelper projectHelper = new ProjectHelper();
 
         // GET: Tickets
         public ActionResult Index()
@@ -37,9 +41,15 @@ namespace BugTracker.Controllers
         }
 
         // GET: Tickets/Create
+        [Authorize(Roles = "Submitter")]
         public ActionResult Create()
         {
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            var userId = User.Identity.GetUserId();
+            if (userId == null)
+            {
+                return RedirectToAction("Index");
+            }
+            ViewBag.ProjectId = new SelectList(projectHelper.ListuserProjects(userId), "Id", "Name");
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Id");
             ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Id");
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Id");
