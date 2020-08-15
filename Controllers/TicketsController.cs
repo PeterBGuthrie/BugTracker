@@ -17,12 +17,30 @@ namespace BugTracker.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private ProjectHelper projectHelper = new ProjectHelper();
+        private UserRolesHelper rolesHelper = new UserRolesHelper();
 
         // GET: Tickets
         public ActionResult Index()
         {
-            var tickets = db.Tickets.Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
-            return View(tickets.ToList());
+            var userId = User.Identity.GetUserId();
+            var myRole = rolesHelper.ListUserRoles(userId).FirstOrDefault();
+            List<Ticket> model = new List<Ticket>();
+            switch (myRole)
+            {
+                case "Admin":
+                    model = db.Tickets.ToList();
+                    break;
+                case "Project Manager":
+                case "Developer":
+                    model = projectHelper.ListUserProjects(userId).SelectMany(p => p.Tickets).ToList();
+                    break;
+                case "Submitter":
+                    model = db.Tickets.Where(t => t.SubmitterId == userId).ToList();
+                    break;
+                default:
+                    return RedirectToAction("Index","Home");
+            }
+            return View();
         }
 
         // GET: Tickets/Details/5
@@ -51,7 +69,6 @@ namespace BugTracker.Controllers
             //}
             ViewBag.ProjectId = new SelectList(projectHelper.ListUserProjects(userId), "Id", "Name");
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name");
-            ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Name");
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name");
             return View();
         }
@@ -62,22 +79,29 @@ namespace BugTracker.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //[Authorize(Roles = "Submitter")]
-        public ActionResult Create([Bind(Include = "Id,ProjectId,TicketPriorityId,TicketStatusId,TicketTypeId,Issue,IssueDescription")] Ticket ticket)
+        public ActionResult Create([Bind(Include = "Id,ProjectId,TicketPriorityId,TicketTypeId,Issue,IssueDescription")] Ticket ticket, bool onPage)
         {
             var userId = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
                 // Add back in: Created, SubmitterId
                 // Set: DeveloperId to null. Is Archived and isResolved will be false
+                ticket.TicketStatusId = db.TicketStatuses.Where(ts => ts.Name == "Open").FirstOrDefault().Id;
                 ticket.Created = DateTime.Now;
                 ticket.SubmitterId = userId;
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if (onPage)
+                {
+                    return RedirectToAction("Details", "Projects", new { id = ticket.ProjectId });
+                }
+                else
+                {
+                    return RedirectToAction("index");
+                }
             }
             ViewBag.ProjectId = new SelectList(projectHelper.ListUserProjects(userId), "Id", "Name");
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Id", ticket.TicketPriorityId);
-            ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Id", ticket.TicketStatusId);
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Id", ticket.TicketTypeId);
             return View(ticket);
         }
@@ -119,32 +143,6 @@ namespace BugTracker.Controllers
             ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Id", ticket.TicketStatusId);
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Id", ticket.TicketTypeId);
             return View(ticket);
-        }
-
-        // GET: Tickets/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ticket ticket = db.Tickets.Find(id);
-            if (ticket == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ticket);
-        }
-
-        // POST: Tickets/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Ticket ticket = db.Tickets.Find(id);
-            db.Tickets.Remove(ticket);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

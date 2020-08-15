@@ -26,7 +26,7 @@ namespace BugTracker.Migrations
                 roleManager.Create(new IdentityRole { Name = "Admin" });
             }
 
-            if (!context.Roles.Any(r => r.Name == "ProjectManager"))
+            if (!context.Roles.Any(r => r.Name == "Project Manager"))
             {
                 roleManager.Create(new IdentityRole { Name = "ProjectManager"});
             }
@@ -75,7 +75,7 @@ namespace BugTracker.Migrations
                 }, "Abc&123!");
             }
             userId = userManager.FindByEmail("arussell@coderfoundry.com").Id;
-            userManager.AddToRole(userId, "ProjectM");
+            userManager.AddToRole(userId, "Project Manager");
 
             // Seeding a Developer
             if (!context.Users.Any(u => u.Email == "davethedev@coderfoundry.com"))
@@ -105,51 +105,50 @@ namespace BugTracker.Migrations
             userId = userManager.FindByEmail("hillary@coderfoundry.com").Id;
             userManager.AddToRole(userId, "Submitter");
 
-            context.SaveChanges();
-            #region TicketType Seed
-            context.TicketTypes.AddOrUpdate(
-                tt => tt.Name,
-                new TicketType() { Name = "Software" },
-                new TicketType() { Name = "Hardware" },
-                new TicketType() { Name = "UI" },
-                new TicketType() { Name = "Defect" },
-                new TicketType() { Name = "Feature Request" },
-                new TicketType() { Name = "Other" }
-                );
-            #endregion
+            //context.SaveChanges();
+            //#region TicketType Seed
+            //context.TicketTypes.AddOrUpdate(
+            //    tt => tt.Name,
+            //    new TicketType() { Name = "Software" },
+            //    new TicketType() { Name = "Hardware" },
+            //    new TicketType() { Name = "UI" },
+            //    new TicketType() { Name = "Defect" },
+            //    new TicketType() { Name = "Feature Request" },
+            //    new TicketType() { Name = "Other" }
+            //    );
+            //#endregion
 
-            #region TicketPriority Seed
-            context.TicketPriorities.AddOrUpdate(
-                tp => tp.Name,
-                new TicketPriority() { Name = "Low" },
-                new TicketPriority() { Name = "Medium" },
-                new TicketPriority() { Name = "High" },
-                new TicketPriority() { Name = "On Hold" }
-                );
-            #endregion
+            //#region TicketPriority Seed
+            //context.TicketPriorities.AddOrUpdate(
+            //    tp => tp.Name,
+            //    new TicketPriority() { Name = "Low" },
+            //    new TicketPriority() { Name = "Medium" },
+            //    new TicketPriority() { Name = "High" },
+            //    new TicketPriority() { Name = "On Hold" }
+            //    );
+            //#endregion
 
-            #region TicketStatus Seed
-            context.TicketStatuses.AddOrUpdate(
-                ts => ts.Name,
-                new TicketStatus() { Name = "Open" },
-                new TicketStatus() { Name = "Assigned" },
-                new TicketStatus() { Name = "Resolved" },
-                new TicketStatus() { Name = "Reopened" },
-                new TicketStatus() { Name = "Reopened" }
-                );
-            #endregion
-            #region Project Seed
-            context.Projects.AddOrUpdate(
-                p => p.Name,
-                new Project() { Name = "Seed 1", Created = DateTime.Now.AddDays(-60), IsArchived = true  },
-                new Project() { Name = "Seed 2", Created = DateTime.Now.AddDays(-45), IsArchived = false },
-                new Project() { Name = "Seed 3", Created = DateTime.Now.AddDays(-30), IsArchived = false },
-                new Project() { Name = "Seed 4", Created = DateTime.Now.AddDays(-15), IsArchived = false },
-                new Project() { Name = "Seed 5", Created = DateTime.Now.AddDays(-7),  IsArchived = false }
-                );
-            #endregion
-            context.SaveChanges();
-
+            //#region TicketStatus Seed
+            //context.TicketStatuses.AddOrUpdate(
+            //    ts => ts.Name,
+            //    new TicketStatus() { Name = "Open" },
+            //    new TicketStatus() { Name = "Assigned" },
+            //    new TicketStatus() { Name = "Resolved" },
+            //    new TicketStatus() { Name = "Reopened" },
+            //    new TicketStatus() { Name = "Reopened" }
+            //    );
+            //#endregion
+            //#region Project Seed
+            //context.Projects.AddOrUpdate(
+            //    p => p.Name,
+            //    new Project() { Name = "Seed 1", Created = DateTime.Now.AddDays(-60), IsArchived = true  },
+            //    new Project() { Name = "Seed 2", Created = DateTime.Now.AddDays(-45), IsArchived = false },
+            //    new Project() { Name = "Seed 3", Created = DateTime.Now.AddDays(-30), IsArchived = false },
+            //    new Project() { Name = "Seed 4", Created = DateTime.Now.AddDays(-15), IsArchived = false },
+            //    new Project() { Name = "Seed 5", Created = DateTime.Now.AddDays(-7),  IsArchived = false }
+            //    );
+            //#endregion
+            //context.SaveChanges();
         }
     }
 }
