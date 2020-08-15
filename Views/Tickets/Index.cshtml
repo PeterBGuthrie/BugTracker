@@ -16,28 +16,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Project.Name)
+            Project
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TicketPriority.Id)
+           Priority
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TicketStatus.Id)
+           Status
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TicketType.Id)
+            Type
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SubmitterId)
+            Submitter
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DeveloperId)
+            Developer
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Issue)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IssueDescription)
+            Issue
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Created)
@@ -69,16 +66,22 @@
             @Html.DisplayFor(modelItem => item.TicketType.Id)
         </td>
         <td>
+            @* Same issue here as below *@
             @Html.DisplayFor(modelItem => item.SubmitterId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DeveloperId)
+            @*@if(item.DeveloperId != null)
+        {
+            @Html.DisplayFor(modelItem => item.Developer.FullName)
+        }
+        else
+        {
+        <span>No Developer Assigned</span>
+        }*@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Issue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IssueDescription)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Created)
@@ -95,7 +98,6 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }
@@ -190,7 +192,6 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
