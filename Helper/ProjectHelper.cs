@@ -73,7 +73,7 @@ namespace BugTracker.Helper
         //    return resultList;
         //}
 
-        public List<Project> ListuserProjects (string userId)
+        public List<Project> ListUserProjects (string userId)
         {
             var user = db.Users.Find(userId);
             var resultList = new List<Project>();

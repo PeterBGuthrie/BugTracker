@@ -41,36 +41,41 @@ namespace BugTracker.Controllers
         }
 
         // GET: Tickets/Create
-        [Authorize(Roles = "Submitter")]
+        //[Authorize(Roles = "Submitter")]
         public ActionResult Create()
         {
             var userId = User.Identity.GetUserId();
-            if (userId == null)
-            {
-                return RedirectToAction("Index");
-            }
-            ViewBag.ProjectId = new SelectList(projectHelper.ListuserProjects(userId), "Id", "Name");
-            ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Id");
-            ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Id");
-            ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Id");
+            //if (userId == null)
+            //{
+            //    return RedirectToAction("Index");
+            //}
+            ViewBag.ProjectId = new SelectList(projectHelper.ListUserProjects(userId), "Id", "Name");
+            ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name");
+            ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Name");
+            ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name");
             return View();
         }
 
         // POST: Tickets/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // To protect from over posting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProjectId,TicketPriorityId,TicketStatusId,TicketTypeId,SubmitterId,DeveloperId,Issue,IssueDescription,Created,Updated,IsResolved,IsArchived")] Ticket ticket)
+        //[Authorize(Roles = "Submitter")]
+        public ActionResult Create([Bind(Include = "Id,ProjectId,TicketPriorityId,TicketStatusId,TicketTypeId,Issue,IssueDescription")] Ticket ticket)
         {
+            var userId = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
+                // Add back in: Created, SubmitterId
+                // Set: DeveloperId to null. Is Archived and isResolved will be false
+                ticket.Created = DateTime.Now;
+                ticket.SubmitterId = userId;
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
+            ViewBag.ProjectId = new SelectList(projectHelper.ListUserProjects(userId), "Id", "Name");
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Id", ticket.TicketPriorityId);
             ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Id", ticket.TicketStatusId);
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Id", ticket.TicketTypeId);
