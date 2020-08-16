@@ -22,24 +22,24 @@ namespace BugTracker.Controllers
         // GET: Tickets
         public ActionResult Index()
         {
-            var userId = User.Identity.GetUserId();
-            var myRole = rolesHelper.ListUserRoles(userId).FirstOrDefault();
-            List<Ticket> model = new List<Ticket>();
-            switch (myRole)
-            {
-                case "Admin":
-                    model = db.Tickets.ToList();
-                    break;
-                case "Project Manager":
-                case "Developer":
-                    model = projectHelper.ListUserProjects(userId).SelectMany(p => p.Tickets).ToList();
-                    break;
-                case "Submitter":
-                    model = db.Tickets.Where(t => t.SubmitterId == userId).ToList();
-                    break;
-                default:
-                    return RedirectToAction("Index","Home");
-            }
+            //var userId = User.Identity.GetUserId();
+            //var myRole = rolesHelper.ListUserRoles(userId).FirstOrDefault();
+            //List<Ticket> model = new List<Ticket>();
+            //switch (myRole)
+            //{
+            //    case "Admin":
+            //        model = db.Tickets.ToList();
+            //        break;
+            //    case "Project Manager":
+            //    case "Developer":
+            //        model = projectHelper.ListUserProjects(userId).SelectMany(p => p.Tickets).ToList();
+            //        break;
+            //    case "Submitter":
+            //        model = db.Tickets.Where(t => t.SubmitterId == userId).ToList();
+            //        break;
+            //    default:
+            //        return RedirectToAction("Index","Home");
+            //}
             return View();
         }
 
