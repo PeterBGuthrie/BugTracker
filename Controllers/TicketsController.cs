@@ -10,6 +10,7 @@ using BugTracker.Helper;
 using BugTracker.Models;
 using Microsoft.AspNet.Identity;
 
+
 namespace BugTracker.Controllers
 {
     //[Authorize]
@@ -18,28 +19,30 @@ namespace BugTracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private ProjectHelper projectHelper = new ProjectHelper();
         private UserRolesHelper rolesHelper = new UserRolesHelper();
+        //TODO: TicketHelper needs to finished and then listed
+        //private TicketHelper ticketHelper = new TicketHelper();
 
         // GET: Tickets
         public ActionResult Index()
         {
-            //var userId = User.Identity.GetUserId();
-            //var myRole = rolesHelper.ListUserRoles(userId).FirstOrDefault();
-            //List<Ticket> model = new List<Ticket>();
-            //switch (myRole)
-            //{
-            //    case "Admin":
-            //        model = db.Tickets.ToList();
-            //        break;
-            //    case "Project Manager":
-            //    case "Developer":
-            //        model = projectHelper.ListUserProjects(userId).SelectMany(p => p.Tickets).ToList();
-            //        break;
-            //    case "Submitter":
-            //        model = db.Tickets.Where(t => t.SubmitterId == userId).ToList();
-            //        break;
-            //    default:
-            //        return RedirectToAction("Index","Home");
-            //}
+            var userId = User.Identity.GetUserId();
+            var myRole = rolesHelper.ListUserRoles(userId).FirstOrDefault();
+            List<Ticket> model = new List<Ticket>();
+            switch (myRole)
+            {
+                case "Admin":
+                    model = db.Tickets.ToList();
+                    break;
+                case "Project Manager":
+                case "Developer":
+                    model = projectHelper.ListUserProjects(userId).SelectMany(p => p.Tickets).ToList();
+                    break;
+                case "Submitter":
+                    model = db.Tickets.Where(t => t.SubmitterId == userId).ToList();
+                    break;
+                default:
+                    return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -63,10 +66,10 @@ namespace BugTracker.Controllers
         public ActionResult Create()
         {
             var userId = User.Identity.GetUserId();
-            //if (userId == null)
-            //{
-            //    return RedirectToAction("Index");
-            //}
+            if (userId == null)
+            {
+                return RedirectToAction("Index");
+            }
             ViewBag.ProjectId = new SelectList(projectHelper.ListUserProjects(userId), "Id", "Name");
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name");
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name");
@@ -84,9 +87,10 @@ namespace BugTracker.Controllers
             var userId = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
+
                 // Add back in: Created, SubmitterId
                 // Set: DeveloperId to null. Is Archived and isResolved will be false
-                ticket.TicketStatusId = db.TicketStatuses.Where(ts => ts.Name == "Open").FirstOrDefault().Id;
+                ticket.TicketStatusId = db.TicketStatuses.FirstOrDefault(ts => ts.Name == "Open").Id;
                 ticket.Created = DateTime.Now;
                 ticket.SubmitterId = userId;
                 db.Tickets.Add(ticket);
@@ -134,8 +138,12 @@ namespace BugTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                var oldTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
+                var newTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
+                //TODO: TicketHelper needs to finished and then listed
+               // ticketHelper.ManageNotifications(oldTicket, newTicket);
                 return RedirectToAction("Index");
             }
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);

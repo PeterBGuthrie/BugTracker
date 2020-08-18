@@ -24,6 +24,7 @@ namespace BugTracker.Helper
             return user.FullName;
         }
 
+        // TODO: .GetUserID(); error
         //public string GetUserRole()
         //{
         //    var userId = HttpContext.Current.User.Identity.GetUserId();

@@ -8,7 +8,7 @@ namespace BugTracker.Models
     public class TicketPriority
     {
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }
