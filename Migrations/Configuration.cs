@@ -28,7 +28,7 @@ namespace BugTracker.Migrations
 
             if (!context.Roles.Any(r => r.Name == "Project Manager"))
             {
-                roleManager.Create(new IdentityRole { Name = "ProjectManager"});
+                roleManager.Create(new IdentityRole { Name = "Project Manager"});
             }
 
             if (!context.Roles.Any(r => r.Name == "Developer"))

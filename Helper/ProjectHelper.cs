@@ -58,6 +58,7 @@ namespace BugTracker.Helper
            var user = db.Users.Find(userId);
            return project.Users.Contains(user);
         }
+        // TODO: Identify purpose to code block and fix issue
         // Optional: List users on a project that occupy a specific role
         //public List<ApplicationUser> ListUsersOnProjectInRole(int projectId, string roleName)
         //{
