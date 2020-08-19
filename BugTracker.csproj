@@ -219,6 +219,10 @@
     <Content Include="Content\hamburgers.min.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\material-design-iconic-font.min.css" />
+    <Content Include="Content\Purple\bootstrap-datepicker.min.css" />
+    <Content Include="Content\Purple\materialdesignicons.min.css" />
+    <Content Include="Content\Purple\style.css" />
+    <Content Include="Content\Purple\vendor.bundle.base.css" />
     <Content Include="Content\select2.min.css" />
     <Content Include="Content\util.css" />
     <Content Include="favicon.ico" />
@@ -229,6 +233,17 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\bg-01.jpg" />
+    <Content Include="Images\Purple\circle.svg" />
+    <Content Include="Images\Purple\face1.jpg" />
+    <Content Include="Images\Purple\face2.jpg" />
+    <Content Include="Images\Purple\face3.jpg" />
+    <Content Include="Images\Purple\face4.jpg" />
+    <Content Include="Images\Purple\img_1.jpg" />
+    <Content Include="Images\Purple\img_2.jpg" />
+    <Content Include="Images\Purple\img_3.jpg" />
+    <Content Include="Images\Purple\img_4.jpg" />
+    <Content Include="Images\Purple\logo-mini.svg" />
+    <Content Include="Images\Purple\logo.svg" />
     <Content Include="Scripts\animsition.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -260,20 +275,7 @@
     <Content Include="fonts\Poppins-SemiBoldItalic.ttf" />
     <Content Include="fonts\Poppins-Thin.ttf" />
     <Content Include="fonts\Poppins-ThinItalic.ttf" />
-    <Content Include="fonts\font-awesome.scss" />
-    <Content Include="fonts\_animated.scss" />
-    <Content Include="fonts\_bordered-pulled.scss" />
-    <Content Include="fonts\_core.scss" />
-    <Content Include="fonts\_fixed-width.scss" />
-    <Content Include="fonts\_icons.scss" />
-    <Content Include="fonts\_larger.scss" />
-    <Content Include="fonts\_list.scss" />
-    <Content Include="fonts\_mixins.scss" />
-    <Content Include="fonts\_path.scss" />
-    <Content Include="fonts\_rotated-flipped.scss" />
-    <Content Include="fonts\_screen-reader.scss" />
-    <Content Include="fonts\_stacked.scss" />
-    <Content Include="fonts\_variables.scss" />
+    <Content Include="Content\font-awesome.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\countdowntime.js" />
     <Content Include="Scripts\datatables.min.js" />
@@ -292,6 +294,15 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\Purple\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\Purple\Chart.min.js" />
+    <Content Include="Scripts\Purple\dashboard.js" />
+    <Content Include="Scripts\Purple\hoverable-collapse.js" />
+    <Content Include="Scripts\Purple\misc.js" />
+    <Content Include="Scripts\Purple\off-canvas.js" />
+    <Content Include="Scripts\Purple\settings.js" />
+    <Content Include="Scripts\Purple\todolist.js" />
+    <Content Include="Scripts\Purple\vendor.bundle.base.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -380,6 +391,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="fonts\Purple\" />
     <Folder Include="Views\ImageUploadValidator\" />
   </ItemGroup>
   <ItemGroup>
