@@ -276,6 +276,7 @@
     <Content Include="fonts\Poppins-Thin.ttf" />
     <Content Include="fonts\Poppins-ThinItalic.ttf" />
     <Content Include="Content\font-awesome.scss" />
+    <None Include="Properties\PublishProfiles\bugOut - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\countdowntime.js" />
     <Content Include="Scripts\datatables.min.js" />
