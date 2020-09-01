@@ -18,7 +18,7 @@ namespace BugTracker.Models
 
         #region Actual Properties
         public string Comment { get; set; }
-        public int Created { get; set; }
+        public DateTime Created { get; set; }
         #endregion
     }
 }
