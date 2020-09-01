@@ -1,4 +1,5 @@
 ﻿using BugTracker.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,13 +25,18 @@ namespace BugTracker.Helper
             return user.FullName;
         }
 
-        // TODO: .GetUserID(); error
-        //public string GetUserRole()
-        //{
-        //    var userId = HttpContext.Current.User.Identity.GetUserId();
-        //    var user = db.Users.Find(userId);
-        //    var roleId = user.Roles.Where(u => u.UserId == userId);
-        //    return null;
-        //}
+
+        public string GetUserRole()
+        {
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+            var roleId = user.Roles.Where(u => u.UserId == userId);
+            return null;
+        }
+
+        public string GetUserRole(string userId)
+        {
+            return null;
+        }
     }
 }

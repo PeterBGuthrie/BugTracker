@@ -20,6 +20,7 @@ namespace BugTracker.Models
         public virtual ICollection<TicketComment> Comments { get; set; }
         public virtual ICollection<TicketHistory> Histories { get; set; }
         public virtual ICollection<TicketNotification> Notifications { get; set; }
+        public virtual ICollection<Ticket> Tickets { get; set; }
 
         #endregion
         #region Actual Properties
@@ -84,6 +85,5 @@ namespace BugTracker.Models
         public System.Data.Entity.DbSet<BugTracker.Models.TicketHistory> TicketHistories { get; set; }
 
         public System.Data.Entity.DbSet<BugTracker.Models.TicketNotification> TicketNotifications { get; set; }
-        public IEnumerable TicketStatus { get; internal set; }
     }
 }

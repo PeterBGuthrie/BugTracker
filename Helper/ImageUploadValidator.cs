@@ -15,22 +15,26 @@ namespace BugTracker.Helper
             {
                 return false;
             }
+
             if (file.ContentLength > 2 * 1024 * 1024 || file.ContentLength < 1024)
             {
                 return false;
             }
+
             try
             {
                 using (var img = Image.FromStream(file.InputStream))
                 {
-                    return ImageFormat.Jpeg.Equals(img.RawFormat) || ImageFormat.Png.Equals(img.RawFormat) || ImageFormat.Gif.Equals(img.RawFormat);
+                    // Approved file formats: testing against them to see if we submitted the right file type
+                    return ImageFormat.Jpeg.Equals(img.RawFormat) ||
+                           ImageFormat.Png.Equals(img.RawFormat) ||
+                           ImageFormat.Gif.Equals(img.RawFormat);
                 }
             }
             catch
             {
                 return false;
             }
-
         }
     }
 }
