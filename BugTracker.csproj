@@ -394,6 +394,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="fonts\Purple\" />
+    <Folder Include="ViewModels\" />
     <Folder Include="Views\ImageUploadValidator\" />
   </ItemGroup>
   <ItemGroup>

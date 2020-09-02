@@ -20,7 +20,7 @@ namespace BugTracker.Models
         public virtual ICollection<TicketComment> Comments { get; set; }
         public virtual ICollection<TicketHistory> Histories { get; set; }
         public virtual ICollection<TicketNotification> Notifications { get; set; }
-        public virtual ICollection<Ticket> Tickets { get; set; }
+
 
         #endregion
         #region Actual Properties
