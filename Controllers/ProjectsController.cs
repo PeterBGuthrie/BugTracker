@@ -32,14 +32,11 @@ namespace BugTracker.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name");
-            ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name");
-
             return View(project);
         }
 
         // GET: Projects/Create
-        [Authorize(Roles = "Admin, ProjectManager")]
+        [Authorize(Roles = "Admin, Project Manager")]
         public ActionResult Create()
         {
             return View();
@@ -50,7 +47,7 @@ namespace BugTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Created,IsArchived")] Project project)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Created,IsArchived")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +80,7 @@ namespace BugTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Created,IsArchived")] Project project)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Created,IsArchived")] Project project)
         {
             if (ModelState.IsValid)
             {
