@@ -98,8 +98,8 @@ namespace BugTracker.Migrations
                 {
                     Email = "hillary@coderfoundry.com",
                     UserName = "hillary@coderfoundry.com",
-                    FirstName = "Hillary's",
-                    LastName = "Clinton"
+                    FirstName = "Hillary",
+                    LastName = "Submitter"
                 }, "Abc&123!");
             }
             userId = userManager.FindByEmail("hillary@coderfoundry.com").Id;
