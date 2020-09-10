@@ -1,12 +1,10 @@
 ﻿using BugTracker.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace BugTracker.Helper
+namespace BugTracker.Helpers
 {
     public class UserRolesHelper
     {
@@ -52,6 +50,14 @@ namespace BugTracker.Helper
                 if (!IsUserInRole(user.Id, roleName))
                     resultList.Add(user);
             }
+            return resultList;
+        }
+
+        public List<Project> ListUserProjects(string userId)
+        {
+            var user = db.Users.Find(userId);
+            var resultList = new List<Project>();
+            resultList.AddRange(user.Projects);
             return resultList;
         }
     }

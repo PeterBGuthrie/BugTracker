@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BugTracker.Helper
+namespace BugTracker.Helpers
 {
     public class ProjectHelper
     {
         // New-ing up access to the database
         private ApplicationDbContext db = new ApplicationDbContext();
+        private UserRolesHelper roleHelper = new UserRolesHelper();
         // What do we need to do ?
         // Add one or more users to a project.
         public void AddUserToProject(string userId, int projectId)
@@ -58,21 +59,24 @@ namespace BugTracker.Helper
            var user = db.Users.Find(userId);
            return project.Users.Contains(user);
         }
-        // TODO: Identify purpose to code block and fix issue
-        // Optional: List users on a project that occupy a specific role
-        //public List<ApplicationUser> ListUsersOnProjectInRole(int projectId, string roleName)
-        //{
-        //    var userList = ListUsersOnProject(projectId);
-        //    var resultList = new List<ApplicationUser>();
-        //    foreach (var user in userList)
-        //    {
-        //        if (roleHelper.IsUserInRole(user.Id, roleName))
-        //        {
-        //            resultList.Add(user);
-        //        }
-        //    }
-        //    return resultList;
-        //}
+
+
+        // The rest of these are optional
+
+
+        public List<ApplicationUser> ListUsersOnProjectInRole(int projectId, string roleName)
+        {
+            var userList = ListUsersOnProject(projectId);
+            var resultList = new List<ApplicationUser>();
+            foreach (var user in userList)
+            {
+                if (roleHelper.IsUserInRole(user.Id, roleName))
+                {
+                    resultList.Add(user);
+                }
+            }
+            return resultList;
+        }
 
         public List<Project> ListUserProjects (string userId)
         {

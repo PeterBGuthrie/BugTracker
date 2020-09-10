@@ -1,11 +1,10 @@
 ﻿using BugTracker.Models;
 using Microsoft.AspNet.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BugTracker.Helper
+namespace BugTracker.Helpers
 {
     public class UserHelper
     {
@@ -25,18 +24,34 @@ namespace BugTracker.Helper
             return user.FullName;
         }
 
+        public string GetAvatarPath()
+        {
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+            return user.AvatarPath;
+        }
 
         public string GetUserRole()
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();
             var user = db.Users.Find(userId);
-            var roleId = user.Roles.Where(u => u.UserId == userId);
-            return null;
+            var roleId = user.Roles.Where(u => u.UserId == userId).FirstOrDefault();
+            var role = db.Roles.Find(roleId);
+            return role.Name;
         }
 
         public string GetUserRole(string userId)
         {
             return null;
         }
+
+        public List<Project> ListUserProjects(string userId)
+        {
+            var user = db.Users.Find(userId);
+            var resultList = new List<Project>();
+            resultList.AddRange(user.Projects);
+            return resultList;
+        }
+
     }
 }
