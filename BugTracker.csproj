@@ -333,10 +333,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Users\ManageUserRole.cshtml" />
     <Content Include="Views\Account\ResendEmailConfirmation.cshtml" />
-    <Content Include="Views\Account\ConfimationSent.cshtml" />
+    <Content Include="Views\Account\ConfirmationSent.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Views\Projects\Create.cshtml" />
     <Content Include="Views\Projects\Delete.cshtml" />
@@ -385,6 +383,8 @@
     <Content Include="Views\TicketTypes\Index.cshtml" />
     <Content Include="Views\Assignments\ManageRoles.cshtml" />
     <Content Include="Views\Assignments\RolesIndex.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\ManageUserRole.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

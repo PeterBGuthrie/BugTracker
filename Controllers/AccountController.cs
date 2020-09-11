@@ -161,13 +161,13 @@ namespace BugTracker.Controllers
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);
                     try
                     {
-                        var from = "Bug Tracker<admin@rogue-asteroid.com>";
+                        var from = "BugOut<AdminNoReply@bugout.com>";
                         var email = new MailMessage(from, model.Email)
                         {
-                            Subject = "Confirm your account",
+                            Subject = "Please confirm your account",
                             Body = "Please confirm your account by clicking <a href =\"" + callbackUrl + "\">here</a>",
                             IsBodyHtml = true
                         };
@@ -180,6 +180,8 @@ namespace BugTracker.Controllers
                         Console.WriteLine(ex.Message);
                         await Task.FromResult(0);
                     }
+
+
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -238,14 +240,11 @@ namespace BugTracker.Controllers
                     Console.WriteLine(ex.Message);
                     await Task.FromResult(0);
                 }
-
-
-
             }
             return RedirectToAction("ConfirmationSent");
         }
         [AllowAnonymous]
-        public ActionResult ConfimationSent()
+        public ActionResult ConfirmationSent()
         {
             return View();
         }
@@ -286,14 +285,13 @@ namespace BugTracker.Controllers
                     var email = new MailMessage(from, model.Email)
                     {
                         Subject = "Reset Password",
-                        Body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>",
+                        Body    = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>",
                         IsBodyHtml = true
                     };
 
                     var svc = new EmailService();
                     await svc.SendAsync(email);
 
-                    //return View(new EmailModel());
                 }
                 catch (Exception ex)
                 {

@@ -13,6 +13,7 @@ namespace BugTracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserRolesHelper roleHelper = new UserRolesHelper();
         // GET: Assignments
+        [Authorize(Roles = "Admin")]
         public ActionResult ManageRoles()
         {
             // Use my ViewBag to hold a multi select list of Users in the system

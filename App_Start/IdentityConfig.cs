@@ -29,9 +29,10 @@ namespace BugTracker
         public async Task SendAsync(MailMessage message)
         {
             var GmailUsername = WebConfigurationManager.AppSettings["username"];
-            var GmailPassword = WebConfigurationManager.AppSettings["password"];
+            var GmailPassward = WebConfigurationManager.AppSettings["password"];
             var host = WebConfigurationManager.AppSettings["host"];
             int port = Convert.ToInt32(WebConfigurationManager.AppSettings["port"]);
+
             using (var smtp = new SmtpClient()
             {
                 Host = host,
@@ -39,7 +40,7 @@ namespace BugTracker
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(GmailUsername, GmailPassword)
+                Credentials = new NetworkCredential(GmailUsername, GmailPassward)
             })
             {
                 try
@@ -51,8 +52,8 @@ namespace BugTracker
                     Console.WriteLine(e.Message);
                     await Task.FromResult(0);
                 }
-            }
 
+            }
         }
     }
 }
