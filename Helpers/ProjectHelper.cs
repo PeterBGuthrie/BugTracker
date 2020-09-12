@@ -17,10 +17,13 @@ namespace BugTracker.Helpers
         // Add one or more users to a project.
         public void AddUserToProject(string userId, int projectId)
         {
+            if(!IsUserOnProject(userId, projectId))
+            {
             Project project = db.Projects.Find(projectId);
             var user = db.Users.Find(userId);
             project.Users.Add(user);
             db.SaveChanges();
+            }
         }
 
         // Remove one or more users from a project
@@ -29,8 +32,7 @@ namespace BugTracker.Helpers
             Project project = db.Projects.Find(projectId);
             var user = db.Users.Find(userId);
             var result = project.Users.Remove(user);
-            // May need later not changing until I run into an error
-            //db.SaveChanges();
+            db.SaveChanges();
             return result;
         }
         // List users on a project
