@@ -1,0 +1,59 @@
+﻿@using BugTracker.Helpers
+@model IEnumerable<BugTracker.Models.ApplicationUser>
+@{
+    ViewBag.Title = "ManageProjectUsers";
+    var projectHelper = new ProjectHelper();
+}
+
+<h2>ManageProjectUsers</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-6">
+            <h2>Select users</h2>
+            @Html.ListBox("UserIds")
+        </div>
+        <div class="col-6">
+            <h2>Select Projects</h2>
+            @Html.ListBox("ProjectIds")
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 offset-1">
+            <button type="submit" class="btn btn-outline-dribbble">Save changes</button>
+        </div>
+    </div>
+}
+
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayName("Projects")
+        </th>
+    </tr>
+
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => user.Email)
+            </td>
+            <td>
+                @foreach (var project in projectHelper.ListUserProjects(user.Id))
+                {
+                    @project.Name
+                    <hr />
+                }
+            </td>
+        </tr>
+    }
+
+</table>

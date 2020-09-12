@@ -385,6 +385,7 @@
     <Content Include="Views\Assignments\RolesIndex.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\ManageUserRole.cshtml" />
+    <Content Include="Views\Assignments\ManageProjectUsers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

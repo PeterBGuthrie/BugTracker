@@ -20,6 +20,7 @@ namespace BugTracker.Helpers
             Project project = db.Projects.Find(projectId);
             var user = db.Users.Find(userId);
             project.Users.Add(user);
+            db.SaveChanges();
         }
 
         // Remove one or more users from a project
@@ -28,6 +29,8 @@ namespace BugTracker.Helpers
             Project project = db.Projects.Find(projectId);
             var user = db.Users.Find(userId);
             var result = project.Users.Remove(user);
+            // May need later not changing until I run into an error
+            //db.SaveChanges();
             return result;
         }
         // List users on a project
@@ -84,6 +87,13 @@ namespace BugTracker.Helpers
             var resultList = new List<Project>();
             resultList.AddRange(user.Projects);
             return resultList;
+        }
+
+        public ICollection<Project> ListUserProjectstest(string userId)
+        {
+            ApplicationUser user = db.Users.Find(userId);
+            var projects = user.Projects.ToList();
+            return (projects);
         }
 
     }
