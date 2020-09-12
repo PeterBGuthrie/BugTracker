@@ -61,6 +61,7 @@ namespace BugTracker.Controllers
         }
 
         // GET: Projects/Edit/5
+        [Authorize(Roles = "Admin, Project Manager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
