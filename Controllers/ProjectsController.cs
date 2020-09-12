@@ -6,13 +6,18 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BugTracker.Helpers;
 using BugTracker.Models;
+using BugTracker.ViewModels;
 
 namespace BugTracker.Controllers
 {
     public class ProjectsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private UserHelper userHelper = new UserHelper();
+        private UserRolesHelper roleHelper = new UserRolesHelper();
+        private ProjectHelper projectHelper = new ProjectHelper();
 
         // GET: Projects
         public ActionResult Index()
@@ -52,12 +57,81 @@ namespace BugTracker.Controllers
             if (ModelState.IsValid)
             {
                 project.Created = DateTime.Now;
+                project.IsArchived = false;
                 db.Projects.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(project);
+        }
+
+        public ActionResult ProjectWizard()
+        {
+            ViewBag.ProjectManagerId = new SelectList(roleHelper.UsersInRole("Project Manager"), "Id", "Email");
+            ViewBag.DeveloperIds = new MultiSelectList(roleHelper.UsersInRole("Developer"), "Id", "Email");
+            ViewBag.SubmitterIds = new MultiSelectList(roleHelper.UsersInRole("Submitter"), "Id", "Email");
+            ViewBag.Errors = "";
+            var model = new ProjectWizardVM();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProjectWizard(ProjectWizardVM model)
+        {
+            #region Fail Cases
+            ViewBag.Errors = "";
+            if (model.ProjectManagerId == null)
+            {
+                ViewBag.Errors += "<p>You must select a Project Manager</p>";
+            }
+            if (model.DeveloperIds.Count == 0)
+            {
+                ViewBag.Errors += "<p>You must select at least one Developer</p>";
+            }
+            if (model.SubmitterIds.Count == 0)
+            {
+                ViewBag.Errors += "<p>You must select at least one Submitter</p>";
+            }
+            if (ViewBag.Errors.Length > 0)
+            {
+                ViewBag.ProjectManagerId = new SelectList(roleHelper.UsersInRole("Project Manager")/*,"--No Project Manager--"*/, "Id", "Email");
+                ViewBag.DeveloperIds = new MultiSelectList(roleHelper.UsersInRole("Developer"), "Id", "Email");
+                ViewBag.SubmitterIds = new MultiSelectList(roleHelper.UsersInRole("Submitter"), "Id", "Email");
+                return View(model);
+            }
+            #endregion
+
+            if (ModelState.IsValid)
+            {
+                Project project = new Project();
+                project.Name = model.Name;
+                project.Created = DateTime.Now;
+                project.IsArchived = false;
+                db.Projects.Add(project);
+                db.SaveChanges();
+
+                projectHelper.AddUserToProject(model.ProjectManagerId, project.Id);
+                foreach (var userId in model.DeveloperIds)
+                {
+                    projectHelper.AddUserToProject(userId, project.Id);
+                }
+                foreach (var userId in model.SubmitterIds)
+                {
+                    projectHelper.AddUserToProject(userId, project.Id);
+                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.ProjectManagerId = new SelectList(roleHelper.UsersInRole("Project Manager"), "Id", "Email");
+                ViewBag.DeveloperIds = new MultiSelectList(roleHelper.UsersInRole("Developer"), "Id", "Email");
+                ViewBag.SubmitterIds = new MultiSelectList(roleHelper.UsersInRole("Submitter"), "Id", "Email");
+                return View(model);
+            }
+
+
         }
 
         // GET: Projects/Edit/5

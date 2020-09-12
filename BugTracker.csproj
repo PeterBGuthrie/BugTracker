@@ -206,6 +206,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Helpers\UserRolesHelper.cs" />
+    <Compile Include="ViewModels\ProjectWizardVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -386,6 +387,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\ManageUserRole.cshtml" />
     <Content Include="Views\Assignments\ManageProjectUsers.cshtml" />
+    <Content Include="Views\Projects\ProjectWizard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -396,7 +398,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="fonts\Purple\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Views\ImageUploadValidator\" />
   </ItemGroup>
   <ItemGroup>

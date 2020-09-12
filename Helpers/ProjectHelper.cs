@@ -88,13 +88,5 @@ namespace BugTracker.Helpers
             resultList.AddRange(user.Projects);
             return resultList;
         }
-
-        public ICollection<Project> ListUserProjectstest(string userId)
-        {
-            ApplicationUser user = db.Users.Find(userId);
-            var projects = user.Projects.ToList();
-            return (projects);
-        }
-
     }
 }
