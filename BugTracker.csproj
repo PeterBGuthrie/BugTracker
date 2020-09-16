@@ -235,6 +235,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\bg-01.jpg" />
+    <Content Include="Images\Purple\bugOutfinal.png" />
     <Content Include="Images\Purple\circle.svg" />
     <Content Include="Images\Purple\face1.jpg" />
     <Content Include="Images\Purple\face2.jpg" />
@@ -278,6 +279,18 @@
     <Content Include="fonts\Poppins-Thin.ttf" />
     <Content Include="fonts\Poppins-ThinItalic.ttf" />
     <Content Include="Content\font-awesome.scss" />
+    <Content Include="fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="fonts\Purple\Ubuntu-Regular.woff2" />
+    <Content Include="fonts\Purple\Ubuntu-Medium.woff2" />
+    <Content Include="fonts\Purple\Ubuntu-Medium.woff" />
+    <Content Include="fonts\Purple\Ubuntu-Regular.woff" />
+    <Content Include="fonts\Purple\Ubuntu-Regular.eot" />
+    <Content Include="fonts\Purple\Ubuntu-Medium.eot" />
+    <Content Include="fonts\Purple\Ubuntu-Regular.ttf" />
+    <Content Include="fonts\Purple\Ubuntu-Medium.ttf" />
+    <Content Include="fonts\materialdesignicons-webfont.eot" />
+    <Content Include="fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="fonts\materialdesignicons-webfont.woff" />
     <None Include="Properties\PublishProfiles\bugOut - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\countdowntime.js" />
@@ -397,7 +410,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="fonts\Purple\" />
     <Folder Include="Views\ImageUploadValidator\" />
   </ItemGroup>
   <ItemGroup>

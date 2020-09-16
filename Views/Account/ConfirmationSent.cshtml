@@ -1,8 +1,84 @@
-﻿
-@{
-    ViewBag.Title = "ConfimationSent";
+﻿@{
+    Layout = null;
 }
 
-<h2>Confimation Sent</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>bugOut</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/Favicon/favicon.ico" />
+    <!--===============================================================================================-->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+    <link href="~/Content/material-design-iconic-font.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+    <link href="~/Content/hamburgers.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+    <link href="~/Content/animsition.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+    <link href="~/Content/select2.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+    <link href="~/Content/daterangepicker.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+    <link href="~/Content/util.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+</head>
+<body>
 
-<p> Please check your email for the latest email confirmation link. Check your spam folder if you do not see it within the next few moments. </p>
+    <div class="limiter">
+        <div class="container-login100" style=" background-image: url('../Images/bg-01.jpg');">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+
+
+                <!-- MVC Code -->
+                <!--TODO: polish Animate this text to be this line and "Your BugOut Bag is on it's way."-->
+                <div>
+                    <p>
+                        <br />
+                        <br />
+                        <h2>Confimation Sent</h2>
+                        <hr />
+                        Please check your email for the latest email confirmation link. Check your spam folder if you do not see it within the next few moments.
+
+
+                        <br />
+                        <br />
+                    </p>
+                    <a href=@Url.Action("Login","Account")>Login</a> |
+                    <a href=@Url.Action("Index","Manage")>Account Settings</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Scripts/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Scripts/popper.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Scripts/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Scripts/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Scripts/main.js"></script>
+
+</body>
+</html>

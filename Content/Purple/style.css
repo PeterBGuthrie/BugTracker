@@ -4923,7 +4923,7 @@ input[type="button"].btn-block {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center; }
-  
+
   .btn-group-vertical > .btn,
   .fc .btn-group-vertical > button,
   .ajax-upload-dragdrop .btn-group-vertical > .ajax-file-upload,
@@ -5276,7 +5276,7 @@ input[type="button"].btn-block {
   .asColorPicker-wrap > .custom-select:not(:first-child) {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0; }
-  
+
   .input-group > .custom-file,
   .asColorPicker-wrap > .custom-file {
     display: -webkit-box;
@@ -10707,7 +10707,7 @@ a.text-dark:hover, a.text-dark:focus {
     border: 1px solid #000; }
   .table, .jsgrid .jsgrid-table {
     border-collapse: collapse !important; }
-    
+
     .table td,
     .jsgrid .jsgrid-table td, .table th, .jsgrid .jsgrid-table th {
       background-color: #ffffff !important; }
@@ -11254,16 +11254,17 @@ input:focus {
   src: url("../../fonts/Ubuntu/Ubuntu-Light.woff2") format("woff2"), url("../../fonts/Ubuntu/Ubuntu-Light.woff") format("woff"), url("../../fonts/Ubuntu/Ubuntu-Light.ttf") format("truetype"); }
 
 @font-face {
-  font-family: 'ubuntu-regular';
-  src: url("../../fonts/Ubuntu/Ubuntu-Regular.eot");
-  /* IE9 Compat Modes */
-  src: url("../../fonts/Ubuntu/Ubuntu-Regular.woff2") format("woff2"), url("../../fonts/Ubuntu/Ubuntu-Regular.woff") format("woff"), url("../../fonts/Ubuntu/Ubuntu-Regular.ttf") format("truetype"); }
+    font-family: 'ubuntu-regular';
+    src: url("../../fonts/Purple/Ubuntu-Regular.eot");
+    /* IE9 Compat Modes */
+    src: url("../../fonts/Purple/Ubuntu-Regular.woff2") format("woff2"), url("../../fonts/Purple/Ubuntu-Regular.woff") format("woff"), url("../../fonts/Purple/Ubuntu-Regular.ttf") format("truetype");
+}
 
 @font-face {
   font-family: 'ubuntu-medium';
-  src: url("../../fonts/Ubuntu/Ubuntu-Medium.eot");
+  src: url("../../fonts/Purple/Ubuntu-Medium.eot");
   /* IE9 Compat Modes */
-  src: url("../../fonts/Ubuntu/Ubuntu-Medium.woff2") format("woff2"), url("../../fonts/Ubuntu/Ubuntu-Medium.woff") format("woff"), url("../../fonts/Ubuntu/Ubuntu-Medium.ttf") format("truetype"); }
+  src: url("../../fonts/Purple/Ubuntu-Medium.woff2") format("woff2"), url("../../fonts/Purple/Ubuntu-Medium.woff") format("woff"), url("../../fonts/Purple/Ubuntu-Medium.ttf") format("truetype"); }
 
 @font-face {
   font-family: 'ubuntu-bold';

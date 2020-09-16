@@ -35,7 +35,6 @@
     <!--===============================================================================================-->
 </head>
 <body>
-
     <div class="limiter">
         <div class="container-login100" style=" background-image: url('../Images/bg-01.jpg');">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
@@ -77,7 +76,7 @@
 
                     <div class="txt1 text-center p-t-54 p-b-20">
                         <span>
-                            Or Sign Up Using
+                            <a href=@Url.Action("Login","Account")>Or Login with a Demo User</a>
                         </span>
                     </div>
 
@@ -103,11 +102,10 @@
                             @Html.ActionLink("Forgot your password?", "ForgotPassword")
                         </span>
                         <span class="txt1 p-b-17">
-                            @Html.ActionLink("Register as a new user", "Register")
-                        </span>
-
-                        <span class="txt1 p-b-17">
                             @Html.ActionLink("Resend Email Confirmation", "ResendEmailConfirmation")
+                        </span>
+                        <span class="txt1 p-b-17">
+                            @Html.ActionLink("Register as a new user", "Register")
                         </span>
                     </div>
             </div>
