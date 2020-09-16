@@ -38,76 +38,76 @@
     <div class="limiter">
         <div class="container-login100" style=" background-image: url('../Images/bg-01.jpg');">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-                    <span class="login100-form-title p-b-49">
-                        Login
+                <span class="login100-form-title p-b-49">
+                    Login
+                </span>
+
+                <section id="loginForm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
+                            <span class="label-input100">Username</span>
+                            <input class="input100" type="email" name="Email" placeholder="Type your username">
+                            <span class="focus-input100" data-symbol="&#xf206;"></span>
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Password is required">
+                            <span class="label-input100">Password</span>
+                            <input class="input100" type="password" name="Password" placeholder="Type your password">
+                            <span class="focus-input100" data-symbol="&#xf190;"></span>
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="p-t-8 p-b-31">
+                            <div class="icheck-primary">
+
+                            </div>
+                        </div>
+                        <!--TODO: Low: Remember me function-->
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button type="submit" class="btn login100-form-btn">Login</button>
+                            </div>
+                        </div>
+                    }
+                </section>
+
+                <div class="txt1 text-center p-t-54 p-b-20">
+                    <span>
+                        <a href=@Url.Action("Login","Account")>Or Login with a Demo User</a>
                     </span>
+                </div>
 
-                    <section id="loginForm">
-                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
-                                <span class="label-input100">Username</span>
-                                <input class="input100" type="email" name="Email" placeholder="Type your username">
-                                <span class="focus-input100" data-symbol="&#xf206;"></span>
-                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="wrap-input100 validate-input" data-validate="Password is required">
-                                <span class="label-input100">Password</span>
-                                <input class="input100" type="password" name="Password" placeholder="Type your password">
-                                <span class="focus-input100" data-symbol="&#xf190;"></span>
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="p-t-8 p-b-31">
-                                <div class="icheck-primary">
+                <!--TODO: Work in login through Social Network
+                    Fonts are broken
+                    Something to do with .scss files and their pathing -->
+                <div class="flex-c-m">
+                    <a href="#" class="login100-social-item bg1">
+                        <i class="fa fa-facebook"></i>
+                    </a>
 
-                                </div>
-                            </div>
-                            <!--TODO: Low: Remember me function-->
-                            <div class="container-login100-form-btn">
-                                <div class="wrap-login100-form-btn">
-                                    <div class="login100-form-bgbtn"></div>
-                                    <button type="submit" class="btn login100-form-btn" >Login</button>
-                                </div>
-                            </div>
-                        }
-                    </section>
+                    <a href="#" class="login100-social-item bg2">
+                        <i class="fa fa-twitter"></i>
+                    </a>
 
-                    <div class="txt1 text-center p-t-54 p-b-20">
-                        <span>
-                            <a href=@Url.Action("Login","Account")>Or Login with a Demo User</a>
-                        </span>
-                    </div>
+                    <a href="#" class="login100-social-item bg3">
+                        <i class="fa fa-google"></i>
+                    </a>
+                </div>
 
-                    <!--TODO: Work in login through Social Network
-                        Fonts are broken
-                        Something to do with .scss files and their pathing -->
-                    <div class="flex-c-m">
-                        <a href="#" class="login100-social-item bg1">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-
-                        <a href="#" class="login100-social-item bg2">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-
-                        <a href="#" class="login100-social-item bg3">
-                            <i class="fa fa-google"></i>
-                        </a>
-                    </div>
-
-                    <div class="flex-col-c p-t-40">
-                        <span class="txt1 p-b-17">
-                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                        </span>
-                        <span class="txt1 p-b-17">
-                            @Html.ActionLink("Resend Email Confirmation", "ResendEmailConfirmation")
-                        </span>
-                        <span class="txt1 p-b-17">
-                            @Html.ActionLink("Register as a new user", "Register")
-                        </span>
-                    </div>
+                <div class="flex-col-c p-t-40">
+                    <span class="txt1 p-b-17">
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </span>
+                    <span class="txt1 p-b-17">
+                        @Html.ActionLink("Resend Email Confirmation", "ResendEmailConfirmation")
+                    </span>
+                    <span class="txt1 p-b-17">
+                        @Html.ActionLink("Register as a new user", "Register")
+                    </span>
+                </div>
             </div>
         </div>
     </div>
